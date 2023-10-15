@@ -5,6 +5,10 @@ import {
   displayNotification,
   makeCustomMessage,
 } from "../../../utills";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import Cookies from "js-cookie";
+import { useAuth } from "../../../context/auth-context";
 
 interface ILoginFormValue {
   email: string;
@@ -13,6 +17,29 @@ interface ILoginFormValue {
 
 const useLoginController = () => {
   const [form] = useForm();
+  const navigate = useNavigate();
+  const auth = useAuth();
+
+  const onLoginSuccessful = () => {
+    Cookies.set("userLoggedIn", "true", {
+      secure: true,
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 3600 * 24),
+    });
+    displayNotification("success", common.messages.login_successful);
+    navigate("/home", { replace: true });
+  };
+
+  const signInWithGoogle = () => {
+    try {
+      if (auth) {
+        signInWithPopup(auth?.auth, auth?.authProvider).then(onLoginSuccessful);
+      }
+    } catch (error) {
+      Cookies.remove("userLoggedIn");
+      console.error(error);
+    }
+  };
 
   const onFinish = (values: ILoginFormValue) => {
     values.email = values.email.trim();
@@ -56,13 +83,27 @@ const useLoginController = () => {
 
     if (
       !form.getFieldError("email").length &&
-      !form.getFieldError("password").length
+      !form.getFieldError("password").length &&
+      auth
     ) {
-      displayNotification("success", common.messages.login_successful);
+      signInWithEmailAndPassword(auth?.auth, values.email, values.password)
+        .then(onLoginSuccessful)
+        .catch((err) => {
+          switch (err.code) {
+            case "auth/invalid-login-credentials":
+              displayNotification("error", common.messages.invalid_credentials);
+              break;
+            case "auth/user-disabled":
+              displayNotification("error", common.messages.account_blocked);
+              break;
+            default:
+              console.error(err);
+          }
+        });
     }
   };
 
-  return { form, onFinish };
+  return { form, onFinish, signInWithGoogle: signInWithGoogle };
 };
 
 export default useLoginController;

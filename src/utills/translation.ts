@@ -12,6 +12,7 @@ export const common = {
     reset_password: "Reset password",
     confirm_password: "Confirm Password",
     new_password: "New Password",
+    home: "Home",
   },
   messages: {
     required: "is required.",
@@ -21,6 +22,8 @@ export const common = {
     password_length: "length must be 8 to 16 characters.",
     email_sent_successful: "Email sent successful!",
     reset_password_successful: "Reset password successful!",
-    password_not_same: "Password are not same",
+    password_not_same: "Password are not same.",
+    invalid_credentials: "Invalid credentials.",
+    account_blocked: "Account blocked, Contact administrator.",
   },
 };

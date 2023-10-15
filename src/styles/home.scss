@@ -1,0 +1,48 @@
+$globalHeight: 100%;
+$globalWidth: 100%;
+
+.home-main {
+  display: flex;
+  align-self: flex-start;
+  height: $globalHeight;
+  width: $globalWidth;
+
+  .header {
+    width: $globalWidth;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: 15px 25px;
+    background-color: white;
+
+    .header-title {
+      display: flex;
+
+      .menu-icon {
+        display: flex;
+        align-items: center;
+      }
+
+      .title {
+        margin-left: 25px;
+        font-weight: bold;
+        font-size: x-large;
+        align-self: center;
+      }
+    }
+
+    .profile-icon {
+      background-color: #f56a00;
+      font-size: 1.5rem;
+    }
+  }
+
+  .antd-table-main {
+    display: flex;
+    flex-direction: column;
+    padding: 0 17px;
+    font-size: xx-large;
+  }
+}

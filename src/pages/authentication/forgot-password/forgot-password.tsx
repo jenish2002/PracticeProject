@@ -8,7 +8,7 @@ const ForgotPassword: React.FC = () => {
   const { form, onFinish } = useForgotPasswordController();
 
   return (
-    <div className="center-and-middle">
+    <div className="flex-center-and-middle">
       <Form className="login-form" form={form} onFinish={onFinish}>
         <div className="big-text large-font-size">
           {common.labels.forgot_password}
@@ -35,7 +35,7 @@ const ForgotPassword: React.FC = () => {
         <Form.Item>
           <Button
             type="primary"
-            className="reset-button"
+            className="login-button"
             htmlType="submit"
             loading={false}
             ghost

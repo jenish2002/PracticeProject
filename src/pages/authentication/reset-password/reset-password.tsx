@@ -9,7 +9,7 @@ const ResetPassword: React.FC = () => {
   const { form, onFinish } = useResetPasswordController();
 
   return (
-    <div className="center-and-middle">
+    <div className="flex-center-and-middle">
       <Form className="login-form" form={form} onFinish={onFinish}>
         <div className="big-text large-font-size">
           {common.labels.reset_password}
@@ -53,7 +53,7 @@ const ResetPassword: React.FC = () => {
         <Form.Item>
           <Button
             type="primary"
-            className="reset-button"
+            className="login-button"
             htmlType="submit"
             loading={false}
             ghost

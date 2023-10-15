@@ -2,15 +2,15 @@ import { Button, Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
 import useLoginController from "./login-controller";
 import { common, makeCustomMessage } from "../../../utills";
-
-import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "antd/es/typography/Link";
 
+import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
+
 const Login: React.FC = () => {
-  const { form, onFinish } = useLoginController();
+  const { form, onFinish, signInWithGoogle } = useLoginController();
 
   return (
-    <div className="center-and-middle">
+    <div className="flex-center-and-middle">
       <Form className="login-form" form={form} onFinish={onFinish}>
         <div className="big-text">{common.labels.welcome}</div>
         <Form.Item
@@ -50,16 +50,7 @@ const Login: React.FC = () => {
             placeholder={common.labels.password}
           />
         </Form.Item>
-        <div className="flex-space-between margin-top-40">
-          <Form.Item
-            name="rememberMe"
-            className="margin-bottom-0"
-            valuePropName="checked"
-          >
-            <Checkbox defaultChecked={true} value={true}>
-              {common.labels.remember_me}
-            </Checkbox>
-          </Form.Item>
+        <div className="flex-end margin-top-8">
           <Link href="/forgot-password">{common.labels.forgot_password}?</Link>
         </div>
         <Form.Item>
@@ -81,6 +72,7 @@ const Login: React.FC = () => {
             icon={<GoogleOutlined className="antd-icon antd-big-icon" />}
             size="large"
             ghost
+            onClick={signInWithGoogle}
           >
             {common.labels.sign_in_with_google}
           </Button>
