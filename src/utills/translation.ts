@@ -13,6 +13,9 @@ export const common = {
     confirm_password: "Confirm Password",
     new_password: "New Password",
     home: "Home",
+    add_student: "Add Student",
+    name: "Name",
+    submit: "Submit",
   },
   messages: {
     required: "is required.",

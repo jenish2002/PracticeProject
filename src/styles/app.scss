@@ -1,5 +1,7 @@
 $globalHeight: 100%;
+$globalWidth: 100%;
 $mainBackGroundColor: #eeeeee;
+$lightCreamColor: #dfdfdf;
 
 html {
   font-size: 15px;
@@ -26,23 +28,57 @@ code {
 }
 
 .app-main {
-  height: $globalHeight;
+  height: $globalHeight - 1%;
   text-align: center;
   background-color: $mainBackGroundColor;
 
   .sidebar-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: $globalHeight;
     background-color: white;
 
+    .sidebar-children {
+      display: flex;
+      flex-direction: column;
+      width: $globalWidth;
+
+      .antd-button {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 2px 18px;
+        height: $globalHeight - 12%;
+
+        .antd-icon {
+          padding-right: 12px;
+          padding-bottom: 2.5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .sidebar-inner {
+      padding: 30px 5px;
+      min-width: 13% !important;
+      border-right: 1px solid $lightCreamColor;
+    }
+
     .close-sidebar {
-      display: none;
+      min-width: 5% !important;
     }
 
     .antd-menu {
       height: $globalHeight;
       font-size: medium;
+      border: 0px;
+    }
+
+    .profile-icon {
+      background-color: #f56a00;
+      font-size: 1.5rem;
     }
   }
 
@@ -120,6 +156,10 @@ code {
 
   .margin-top-8 {
     margin-top: 8px;
+  }
+
+  .margin-top-32 {
+    margin-top: 32px;
   }
 
   .form-item-textbox {

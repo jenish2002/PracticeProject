@@ -1,4 +1,4 @@
-import { Button, Checkbox, Divider, Form, Input } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
 import useLoginController from "./login-controller";
 import { common, makeCustomMessage } from "../../../utills";
@@ -7,7 +7,7 @@ import Link from "antd/es/typography/Link";
 import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 
 const Login: React.FC = () => {
-  const { form, onFinish, signInWithGoogle } = useLoginController();
+  const { form, isLoading, onFinish, signInWithGoogle } = useLoginController();
 
   return (
     <div className="flex-center-and-middle">
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
             type="primary"
             className="login-button"
             htmlType="submit"
-            loading={false}
+            loading={isLoading}
           >
             {common.labels.login}
           </Button>

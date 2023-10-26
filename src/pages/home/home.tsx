@@ -1,26 +1,20 @@
-import { Table } from "antd";
-import Sidebar from "../../components/sidebar";
-import Header from "./header";
+import { Route, Routes } from "react-router-dom";
+
+import { Sidebar } from "../../components";
 import useHomeController from "./home-controller";
+import ListStudent from "./list-students";
+import AddStudent from "./add-students";
 
 const Home: React.FC = () => {
-  const { columns, columnData } = useHomeController();
+  useHomeController();
 
   return (
     <div className="home-main">
       <Sidebar>
-        <div>
-          <Header />
-          <div className="antd-table-main">
-            <Table
-              rowKey="id"
-              showHeader={true}
-              columns={columns}
-              dataSource={columnData}
-              pagination={false}
-            />
-          </div>
-        </div>
+        <Routes>
+          <Route index element={<ListStudent />} />
+          <Route path="add-student" element={<AddStudent />} />
+        </Routes>
       </Sidebar>
     </div>
   );

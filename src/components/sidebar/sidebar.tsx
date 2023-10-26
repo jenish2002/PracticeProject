@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { Avatar, Layout, Menu, Skeleton } from "antd";
 import useSidebarController from "./sidebar-controller";
 
 interface ISidebar {
@@ -8,15 +8,36 @@ interface ISidebar {
 const { Sider } = Layout;
 
 const Sidebar: React.FC<ISidebar> = ({ children }) => {
-  const { isSidebarOpen, onClickMenuItem } = useSidebarController();
+  const { auth, isSidebarOpen, onClickMenuItem } = useSidebarController();
 
   return (
     <Layout className="sidebar-main">
       <Sider
-        className={isSidebarOpen ? "" : "close-sidebar"}
+        className={`sidebar-inner ${isSidebarOpen ? "" : "close-sidebar"}`}
         trigger={null}
         theme="light"
+        collapsible
+        collapsed={!isSidebarOpen}
       >
+        <div>
+          {auth?.authLoading ? (
+            <Skeleton.Avatar active={true} size="large" />
+          ) : auth?.user?.profileIconUrl ? (
+            <img
+              className="profile-icon"
+              src={auth?.user?.profileIconUrl}
+              alt=""
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <Avatar
+              className="profile-icon"
+              shape="circle"
+              size="large"
+              icon="U"
+            />
+          )}
+        </div>
         <Menu
           className="antd-menu"
           mode="inline"
@@ -43,7 +64,7 @@ const Sidebar: React.FC<ISidebar> = ({ children }) => {
           ]}
         />
       </Sider>
-      {children}
+      <div className="sidebar-children">{children}</div>
     </Layout>
   );
 };

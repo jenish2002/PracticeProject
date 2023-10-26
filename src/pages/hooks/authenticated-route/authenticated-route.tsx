@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/auth-context";
+import { useAuth } from "../../../context";
 
 interface IUseAuthenticatedRoute {
   children: React.ReactNode;

@@ -1,9 +1,4 @@
-import {
-  Auth,
-  GoogleAuthProvider,
-  getAuth,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { Auth, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { firebaseApp } from "../../config/firebase-config";
 import {
   ReactNode,
@@ -13,6 +8,8 @@ import {
   useState,
 } from "react";
 import Cookies from "js-cookie";
+
+import { useGetUser } from "../../apis";
 
 interface IAuthContext {
   auth: Auth;
@@ -29,7 +26,7 @@ interface IAuthContextProvider {
 interface IUserDetails {
   name: string;
   email: string;
-  profileIcon: string;
+  profileIconUrl: string;
 }
 
 export const useAuth = () => useContext(AuthContext);
@@ -39,31 +36,24 @@ export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthContextProvider: React.FC<IAuthContextProvider> = ({
   children,
 }) => {
-  const auth = getAuth(firebaseApp);
+  const auth: Auth = getAuth(firebaseApp);
   const authProvider = new GoogleAuthProvider();
 
-  const [authLoading, setAuthLoading] = useState<boolean>(true);
   const [userDetails, setUserDetails] = useState<IUserDetails>();
 
-  useEffect(() => {
-    setAuthLoading(true);
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserDetails({
-          name: user?.displayName || "",
-          email: user?.email || "",
-          profileIcon: user?.photoURL || "",
-        });
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const getUser = useGetUser(auth);
 
   useEffect(() => {
-    if (userDetails) {
-      setAuthLoading(false);
+    if (getUser.isSuccess && getUser.data) {
+      const user = getUser.data;
+
+      setUserDetails({
+        name: user?.displayName || "",
+        email: user?.email || "",
+        profileIconUrl: user?.photoURL || "",
+      });
     }
-  }, [userDetails]);
+  }, [getUser.isSuccess, getUser.data]);
 
   return (
     <AuthContext.Provider
@@ -72,7 +62,7 @@ export const AuthContextProvider: React.FC<IAuthContextProvider> = ({
         authProvider,
         user: userDetails,
         userLoggedIn: Cookies.get("userLoggedIn") === "true",
-        authLoading: authLoading,
+        authLoading: getUser.isLoading,
       }}
     >
       {children}

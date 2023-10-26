@@ -1,7 +1,7 @@
 import { NotificationType } from "../types";
 import { notification } from "antd";
 
-export  { common } from "./translation";
+export { common } from "./translation";
 
 export const makeCustomMessage = (...messages: string[]) => messages.join(" ");
 
@@ -18,10 +18,13 @@ export const displayNotification = (
   });
 };
 
-export const onMenuClose = () => {
+export const onMenuOpenClose = () => {
   document.dispatchEvent(new CustomEvent("onSidebarOpenClose"));
 };
 
+export const onMenuClose = () => {
+  document.dispatchEvent(new CustomEvent("onSidebarClose"));
+};
 
 export const EMAIL_REGEX = new RegExp(
   /^[a-zA-Z0-9._+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/i

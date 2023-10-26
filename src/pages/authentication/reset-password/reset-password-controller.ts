@@ -1,10 +1,11 @@
 import { useForm } from "antd/es/form/Form";
+import { useNavigate } from "react-router-dom";
+
 import {
   common,
   displayNotification,
   makeCustomMessage,
 } from "../../../utills";
-import { useNavigate } from "react-router-dom";
 
 interface IResetPasswordFormValue {
   password: string;
