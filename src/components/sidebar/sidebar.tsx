@@ -8,24 +8,23 @@ interface ISidebar {
 const { Sider } = Layout;
 
 const Sidebar: React.FC<ISidebar> = ({ children }) => {
-  const { auth, isSidebarOpen, onClickMenuItem } = useSidebarController();
+  const { authIsLoding, authUser, userIcon, isSidebarOpen, onClickMenuItem } =
+    useSidebarController();
 
   return (
     <Layout className="sidebar-main">
       <Sider
-        className={`sidebar-inner ${isSidebarOpen ? "" : "close-sidebar"}`}
+        className={`sidebar-inner ${isSidebarOpen ? "open-sidebar" : ""}`}
         trigger={null}
         theme="light"
-        collapsible
-        collapsed={!isSidebarOpen}
       >
-        <div>
-          {auth?.authLoading ? (
+        <div className="profile-icon-outer">
+          {authIsLoding ? (
             <Skeleton.Avatar active={true} size="large" />
-          ) : auth?.user?.profileIconUrl ? (
+          ) : authUser?.profileIconUrl ? (
             <img
               className="profile-icon"
-              src={auth?.user?.profileIconUrl}
+              src={authUser?.profileIconUrl}
               alt=""
               referrerPolicy="no-referrer"
             />
@@ -34,9 +33,15 @@ const Sidebar: React.FC<ISidebar> = ({ children }) => {
               className="profile-icon"
               shape="circle"
               size="large"
-              icon="U"
+              icon={userIcon}
             />
           )}
+          <div className="profile-name">
+            <span className="profile-text margin-bottom-4">
+              {authUser?.name}
+            </span>
+            <span className="profile-text gray-text">{authUser?.email}</span>
+          </div>
         </div>
         <Menu
           className="antd-menu"
@@ -64,7 +69,9 @@ const Sidebar: React.FC<ISidebar> = ({ children }) => {
           ]}
         />
       </Sider>
-      <div className="sidebar-children">{children}</div>
+      <div className={`sidebar-children ${isSidebarOpen ? "" : "no-sidebar"}`}>
+        {children}
+      </div>
     </Layout>
   );
 };

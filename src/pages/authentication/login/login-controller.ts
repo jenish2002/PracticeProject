@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 import {
   EMAIL_REGEX,
+  QUERY_KEY,
   common,
   displayNotification,
   makeCustomMessage,
@@ -12,6 +13,7 @@ import {
 import { useAuth } from "../../../context";
 import { ILoginFormValue } from "../../../types";
 import { useVerifyUser } from "./services";
+import { queryClient } from "../../../query-client";
 
 const useLoginController = () => {
   const [form] = useForm();
@@ -89,6 +91,7 @@ const useLoginController = () => {
         path: "/",
         expires: new Date(Date.now() + 1000 * 3600 * 24),
       });
+      queryClient.removeQueries({ queryKey: [QUERY_KEY.GET_USER] });
 
       displayNotification("success", common.messages.login_successful);
       navigate("/home", { replace: true });

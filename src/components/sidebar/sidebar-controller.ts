@@ -51,7 +51,13 @@ const useSidebarController = () => {
     };
   }, [isSidebarOpen]);
 
-  return { auth, isSidebarOpen, onClickMenuItem };
+  return {
+    authIsLoding: auth?.authLoading,
+    authUser: auth?.user,
+    userIcon: auth?.user?.email?.slice(0, 1).toLocaleUpperCase(),
+    isSidebarOpen,
+    onClickMenuItem,
+  };
 };
 
 export default useSidebarController;

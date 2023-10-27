@@ -6,7 +6,8 @@ import { common, makeCustomMessage } from "../../../utills";
 import { LeftOutlined, UserOutlined } from "@ant-design/icons";
 
 const AddStudent: React.FC = () => {
-  const { form, onFinish, onClickBack } = useAddStudentController();
+  const { form, addStudentIsLoading, onFinish, onClickBack } =
+    useAddStudentController();
 
   return (
     <div>
@@ -40,14 +41,15 @@ const AddStudent: React.FC = () => {
               autoFocus
             />
           </Form.Item>
-          <Form.Item className="margin-top-32">
+          <Form.Item className="margin-top-64">
             <Button
               type="primary"
-              className="antd-button"
+              className="button"
               htmlType="submit"
-              loading={false}
+              loading={addStudentIsLoading}
+              ghost
             >
-              {common.labels.submit}
+              {common.labels.add}
             </Button>
           </Form.Item>
         </Form>

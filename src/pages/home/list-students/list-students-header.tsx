@@ -17,7 +17,7 @@ const ListStudentHeader: React.FC<IListStudentHeader> = ({
         <span className="menu-icon" onClick={onMenuOpenClose}>
           <MenuIcon />
         </span>
-        <div className="title">{common.labels.home}</div>
+        <div className="title">{common.labels.students}</div>
       </div>
       <Button
         className="antd-button"

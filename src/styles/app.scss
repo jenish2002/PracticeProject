@@ -38,10 +38,17 @@ code {
     height: $globalHeight;
     background-color: white;
 
+    .no-sidebar {
+      width: $globalWidth !important;
+    }
+
     .sidebar-children {
-      display: flex;
-      flex-direction: column;
-      width: $globalWidth;
+      position: absolute;
+      right: 0;
+      transition: all 0.25s;
+      width: calc($globalWidth - 240px);
+      height: $globalHeight;
+      background-color: white;
 
       .antd-button {
         display: flex;
@@ -61,24 +68,52 @@ code {
     }
 
     .sidebar-inner {
-      padding: 30px 5px;
-      min-width: 13% !important;
-      border-right: 1px solid $lightCreamColor;
+      height: $globalHeight;
+      width: $globalWidth;
     }
 
-    .close-sidebar {
-      min-width: 5% !important;
+    .open-sidebar {
+      min-width: 240px !important;
+      padding: 30px 5px;
+      border-right: 1px solid $lightCreamColor;
+      position: fixed;
+      transition: all 0.25s;
+      width: 240px;
     }
 
     .antd-menu {
-      height: $globalHeight;
       font-size: medium;
       border: 0px;
     }
 
-    .profile-icon {
-      background-color: #f56a00;
-      font-size: 1.5rem;
+    .profile-icon-outer {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 15px;
+      align-items: center;
+
+      .profile-name {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-bottom: 20px;
+
+        .profile-text {
+          font-size: medium;
+          font-weight: bold;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .profile-icon {
+        background-color: #f56a00;
+        width: 55%;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        border-radius: 100px;
+      }
     }
   }
 
@@ -158,8 +193,8 @@ code {
     margin-top: 8px;
   }
 
-  .margin-top-32 {
-    margin-top: 32px;
+  .margin-top-64 {
+    margin-top: 64px;
   }
 
   .form-item-textbox {
@@ -171,6 +206,10 @@ code {
     margin-bottom: 0px;
   }
 
+  .margin-bottom-4 {
+    margin-bottom: 4px;
+  }
+
   .antd-big-icon {
     font-size: larger;
   }
@@ -179,6 +218,10 @@ code {
     display: flex;
     justify-content: center;
   }
+}
+
+.gray-text {
+  color: #686868;
 }
 
 .ant-form-item-explain-error {

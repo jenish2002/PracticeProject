@@ -12,10 +12,12 @@ export const common = {
     reset_password: "Reset password",
     confirm_password: "Confirm Password",
     new_password: "New Password",
-    home: "Home",
+    students: "Students",
     add_student: "Add Student",
     name: "Name",
-    submit: "Submit",
+    add: "Add",
+    records: "record(s)",
+    search: "Search",
   },
   messages: {
     required: "is required.",
@@ -28,5 +30,7 @@ export const common = {
     password_not_same: "Password are not same.",
     invalid_credentials: "Invalid credentials.",
     account_blocked: "Account blocked, Contact administrator.",
+    please_provide_all_details: "Please provide all details.",
+    student_added_successfully: "Student added successfully.",
   },
 };

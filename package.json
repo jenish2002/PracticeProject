@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.200",
     "react-router-dom": "^6.15.0"
   }
 }

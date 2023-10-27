@@ -1,7 +1,9 @@
 import { NotificationType } from "../types";
 import { notification } from "antd";
 
-export { common } from "./translation";
+export * from "./enums";
+
+export * from "./translation";
 
 export const makeCustomMessage = (...messages: string[]) => messages.join(" ");
 

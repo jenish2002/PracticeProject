@@ -6,7 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-import { MUTATION_KEY } from "../../../../../utills/enums";
+import { MUTATION_KEY } from "../../../../../utills";
 import { IFirebaseError } from "../../../../../types";
 
 interface IUserDetails {

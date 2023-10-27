@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Auth, signOut } from "firebase/auth";
 
-import { MUTATION_KEY } from "../../utills/enums";
+import { MUTATION_KEY } from "../../utills";
 
 const logoutUser = async (auth: Auth) => {
   return await signOut(auth);
