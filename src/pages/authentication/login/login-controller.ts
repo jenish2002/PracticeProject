@@ -91,10 +91,9 @@ const useLoginController = () => {
         path: "/",
         expires: new Date(Date.now() + 1000 * 3600 * 24),
       });
-      queryClient.removeQueries({ queryKey: [QUERY_KEY.GET_USER] });
-
+      queryClient.refetchQueries({ queryKey: [QUERY_KEY.GET_USER] });
       displayNotification("success", common.messages.login_successful);
-      navigate("/home", { replace: true });
+      navigate("/students", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verifyUser.isSuccess]);

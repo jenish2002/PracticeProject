@@ -1,9 +1,8 @@
 import { Button, Form, Input } from "antd";
+import { LeftOutlined, UserOutlined } from "@ant-design/icons";
 
 import useAddStudentController from "./add-students-controller";
 import { common, makeCustomMessage } from "../../../utills";
-
-import { LeftOutlined, UserOutlined } from "@ant-design/icons";
 
 const AddStudent: React.FC = () => {
   const { form, addStudentIsLoading, onFinish, onClickBack } =

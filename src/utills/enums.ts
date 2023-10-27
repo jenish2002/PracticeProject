@@ -8,3 +8,8 @@ export const MUTATION_KEY = {
   LOGOUT_USER: "logout-user",
   ADD_STUDENT: "add-student",
 };
+
+export const MENU_ITEMS_KEY = {
+  STUDENTS: "students",
+  LOGOUT: "logout",
+};

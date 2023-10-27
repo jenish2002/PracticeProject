@@ -1,4 +1,5 @@
 import { useForm } from "antd/es/form/Form";
+import { useNavigate } from "react-router-dom";
 
 import {
   EMAIL_REGEX,
@@ -6,7 +7,6 @@ import {
   displayNotification,
   makeCustomMessage,
 } from "../../../utills";
-import { useNavigate } from "react-router-dom";
 
 interface ILoginFormValue {
   email: string;

@@ -1,5 +1,7 @@
 import { Avatar, Layout, Menu, Skeleton } from "antd";
+
 import useSidebarController from "./sidebar-controller";
+import { MENU_ITEMS_KEY, capitalizeFirstLetter } from "../../utills";
 
 interface ISidebar {
   children: React.ReactNode;
@@ -8,8 +10,14 @@ interface ISidebar {
 const { Sider } = Layout;
 
 const Sidebar: React.FC<ISidebar> = ({ children }) => {
-  const { authIsLoding, authUser, userIcon, isSidebarOpen, onClickMenuItem } =
-    useSidebarController();
+  const {
+    authIsLoding,
+    authUser,
+    userIcon,
+    isSidebarOpen,
+    sidebarSelectedItemKey,
+    onClickMenuItem,
+  } = useSidebarController();
 
   return (
     <Layout className="sidebar-main">
@@ -20,51 +28,59 @@ const Sidebar: React.FC<ISidebar> = ({ children }) => {
       >
         <div className="profile-icon-outer">
           {authIsLoding ? (
-            <Skeleton.Avatar active={true} size="large" />
-          ) : authUser?.profileIconUrl ? (
-            <img
-              className="profile-icon"
-              src={authUser?.profileIconUrl}
-              alt=""
-              referrerPolicy="no-referrer"
-            />
+            <>
+              <Skeleton.Avatar
+                className="profile-icon-skeleton"
+                style={{ width: "90px", height: "90px" }}
+                active={true}
+                size="large"
+              />
+              <div className="profile-name-skeleton">
+                <Skeleton.Input active={true} size="small" block={true} />
+                <Skeleton.Input active={true} size="small" block={true} />
+              </div>
+            </>
           ) : (
-            <Avatar
-              className="profile-icon"
-              shape="circle"
-              size="large"
-              icon={userIcon}
-            />
+            <>
+              {authUser?.profileIconUrl ? (
+                <img
+                  className="profile-icon"
+                  src={authUser?.profileIconUrl}
+                  alt=""
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <Avatar
+                  className="profile-icon-default"
+                  shape="circle"
+                  size="large"
+                  icon={userIcon}
+                />
+              )}
+              <div className="profile-name">
+                <span className="profile-text margin-bottom-6">
+                  {capitalizeFirstLetter(authUser?.name)}
+                </span>
+                <span className="profile-text gray-text">
+                  {capitalizeFirstLetter(authUser?.email)}
+                </span>
+              </div>
+            </>
           )}
-          <div className="profile-name">
-            <span className="profile-text margin-bottom-4">
-              {authUser?.name}
-            </span>
-            <span className="profile-text gray-text">{authUser?.email}</span>
-          </div>
         </div>
         <Menu
           className="antd-menu"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[sidebarSelectedItemKey]}
           onClick={onClickMenuItem}
           items={[
             {
-              key: "1",
-              label: "nav 1",
+              key: MENU_ITEMS_KEY.STUDENTS,
+              label: "Students",
             },
             {
-              key: "2",
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              label: "nav 3",
-            },
-            {
-              key: "logout",
+              key: MENU_ITEMS_KEY.LOGOUT,
               label: "Logout",
-              onClick: onClickMenuItem,
             },
           ]}
         />

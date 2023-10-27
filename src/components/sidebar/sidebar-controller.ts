@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { useAuth } from "../../context";
 import { useLogoutUser } from "../../apis";
+import { capitalizeFirstLetter } from "../../utills";
 
 const useSidebarController = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const auth = useAuth();
 
   const logoutUser = useLogoutUser();
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [sidebarSelectedItemKey, setSidebarSelectedItemKey] = useState("");
 
   const onClickMenuItem = async (e: { key: string }) => {
-    if (e.key === "logout" && auth) {
-      logoutUser.mutate(auth?.auth);
+    if (auth) {
+      switch (e.key) {
+        case "student":
+          navigate("/students", { replace: pathname.includes("/students") });
+          break;
+        case "logout":
+          logoutUser.mutate(auth?.auth);
+          break;
+        default:
+          break;
+      }
+      setSidebarSelectedItemKey(e.key);
     }
+  };
+
+  const changeSidebarSelectedItemKey = (event: CustomEvent) => {
+    setSidebarSelectedItemKey(event.detail);
   };
 
   useEffect(() => {
@@ -44,18 +62,27 @@ const useSidebarController = () => {
 
     document.addEventListener("onSidebarOpenClose", sidebarOpenClose);
     document.addEventListener("onSidebarClose", sidebarClose);
+    document.addEventListener(
+      "onChangeSidebarSelectedItem",
+      changeSidebarSelectedItemKey as EventListener
+    );
 
     return () => {
       document.removeEventListener("onSidebarOpenClose", sidebarOpenClose);
       document.removeEventListener("onSidebarClose", sidebarClose);
+      document.removeEventListener(
+        "onChangeSidebarSelectedItem",
+        changeSidebarSelectedItemKey as EventListener
+      );
     };
   }, [isSidebarOpen]);
 
   return {
     authIsLoding: auth?.authLoading,
     authUser: auth?.user,
-    userIcon: auth?.user?.email?.slice(0, 1).toLocaleUpperCase(),
+    userIcon: capitalizeFirstLetter(auth?.user?.email?.slice(0, 1)),
     isSidebarOpen,
+    sidebarSelectedItemKey,
     onClickMenuItem,
   };
 };

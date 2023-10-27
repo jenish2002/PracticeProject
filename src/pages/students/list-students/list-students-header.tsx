@@ -1,8 +1,8 @@
 import { common, onMenuOpenClose } from "../../../utills";
 import { Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 import { MenuIcon } from "../../../icons/menu-icon";
-import { PlusOutlined } from "@ant-design/icons";
 
 interface IListStudentHeader {
   onClickAddStudent: () => void;

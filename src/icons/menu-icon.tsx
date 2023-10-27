@@ -15,6 +15,6 @@ export const MenuIcon = () => (
       strokeMiterlimit="10"
       strokeWidth="32"
       d="M80 160h352M80 256h352M80 352h352"
-    ></path>
+    />
   </svg>
 );

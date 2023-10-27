@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Sidebar } from "../../components";
-import useHomeController from "./home-controller";
 import ListStudent from "./list-students";
 import AddStudent from "./add-students";
+import useStudentsController from "./students-controller";
 
-const Home: React.FC = () => {
-  useHomeController();
+const Students: React.FC = () => {
+  useStudentsController();
 
   return (
-    <div className="home-main">
+    <div className="students-main">
       <Sidebar>
         <Routes>
           <Route index element={<ListStudent />} />
@@ -20,4 +20,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Students;

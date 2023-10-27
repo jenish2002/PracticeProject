@@ -11,10 +11,10 @@ import { queryClient } from "./query-client";
 import { AuthenticatedRoute } from "./pages/hooks";
 import { AuthContextProvider } from "./context";
 
-import Login from "./pages/authentication/login/login";
-import ForgotPassword from "./pages/authentication/forgot-password/forgot-password";
-import ResetPassword from "./pages/authentication/reset-password/reset-password";
-import Home from "./pages/home/home";
+import Login from "./pages/authentication/login";
+import ForgotPassword from "./pages/authentication/forgot-password";
+import ResetPassword from "./pages/authentication/reset-password";
+import Students from "./pages/students";
 
 const App = () => {
   return (
@@ -28,7 +28,7 @@ const App = () => {
                   path="/"
                   element={
                     Cookies.get("userLoggedIn") === "true" ? (
-                      <Navigate to="home" />
+                      <Navigate to="students" />
                     ) : (
                       <Navigate to="login" />
                     )
@@ -37,7 +37,7 @@ const App = () => {
                 <Route path="login" element={<Login />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPassword />} />
-                <Route path="home/*" element={<Home />} />
+                <Route path="students/*" element={<Students />} />
               </Routes>
             </AuthenticatedRoute>
           </AuthContextProvider>

@@ -25,7 +25,7 @@ const useAddStudentController = () => {
   };
 
   const onClickBack = () => {
-    navigate("/home", { replace: true });
+    navigate("/students", { replace: true });
   };
 
   useEffect(() => {

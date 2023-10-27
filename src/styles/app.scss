@@ -107,12 +107,39 @@ code {
         }
       }
 
-      .profile-icon {
+      .profile-icon-default {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: xx-large;
         background-color: #f56a00;
-        width: 55%;
-        font-size: 1.5rem;
+        width: 90px;
+        height: 90px;
         margin-bottom: 20px;
         border-radius: 100px;
+      }
+
+      .profile-icon {
+        display: flex;
+        align-items: center;
+        font-size: xx-large;
+        width: 90px;
+        height: 90px;
+        margin-bottom: 20px;
+        border-radius: 100px;
+      }
+
+      .profile-icon-skeleton {
+        margin-bottom: 23px;
+      }
+
+      .profile-name-skeleton {
+        display: flex;
+        flex-direction: column;
+        width: calc($globalWidth - 15%);
+        justify-content: space-between;
+        padding-bottom: 15px;
+        gap: 7px;
       }
     }
   }
@@ -206,8 +233,8 @@ code {
     margin-bottom: 0px;
   }
 
-  .margin-bottom-4 {
-    margin-bottom: 4px;
+  .margin-bottom-6 {
+    margin-bottom: 6px;
   }
 
   .antd-big-icon {

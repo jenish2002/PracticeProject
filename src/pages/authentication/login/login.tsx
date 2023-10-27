@@ -1,8 +1,9 @@
 import { Button, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
+import Link from "antd/es/typography/Link";
+
 import useLoginController from "./login-controller";
 import { common, makeCustomMessage } from "../../../utills";
-import Link from "antd/es/typography/Link";
 
 import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 

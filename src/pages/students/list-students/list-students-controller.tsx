@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import debounce from "lodash/debounce";
 
 import { onMenuClose } from "../../../utills";
-import useGetStudents from "../services/get-students/get-students";
+import { useGetStudents } from "../services";
 import { useAuth } from "../../../context";
 
 const useListStudentController = () => {

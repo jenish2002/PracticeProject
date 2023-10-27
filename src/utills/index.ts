@@ -28,6 +28,16 @@ export const onMenuClose = () => {
   document.dispatchEvent(new CustomEvent("onSidebarClose"));
 };
 
+export const onMenuSelectedItemChange = (key: string) => {
+  document.dispatchEvent(
+    new CustomEvent("onChangeSidebarSelectedItem", { detail: key })
+  );
+};
+
 export const EMAIL_REGEX = new RegExp(
   /^[a-zA-Z0-9._+-]+@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/i
 );
+
+export const capitalizeFirstLetter = (value?: string | null) => {
+  return value ? value.replace(/^./, value[0].toUpperCase()) : value;
+};
